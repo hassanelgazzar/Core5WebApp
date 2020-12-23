@@ -1,0 +1,38 @@
+//create sln command
+dotnet new sln
+
+// create Api project as web api
+dotnet new webapi -o Api
+
+//add Api on sln
+dotnet sln add API
+
+///run App
+dotnet run 
+
+///Trust the Https Development 
+dotnet dev-certs https --trust
+
+
+//////////Entities Add APPUSER CLASS FOR USER ENTITY //////////////////////
+
+
+/////////////////////DATA DATACONTEXT //////////////////////////////////////////////////
+/////////////////////////////////////ADD APP USER 
+        public DbSet<AppUser>Users { get; set; }
+
+
+/////////DataBase Connection appsettings.Development.json call Datata Base////////////////////
+  "ConnectionString":{
+   "DefaultConnection":"Data source=datingapp.db"
+  },
+
+///////////////////DataBase Startup.cs in funCtion ConfigureServices ///////////////////////////////
+     services.AddDbContext<DataContext>(options=>{
+             options.UseSqlite("Connection string");
+            });
+////////////////////////// CREATE THE DATABASE///////////////////////////////////////////////////////////////////////////
+dotnet ef migrations add InitialCreate -o Data/Migrations
+
+/////////////////////////////Update DATABASE//////////////////////////////////
+dotnet ef database update
